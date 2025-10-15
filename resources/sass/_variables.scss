@@ -1,0 +1,27 @@
+// ---- Variables perso (AUCUN @use ici) ----
+
+// Typographie
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Couleurs
+$primary: #6fbc98; // vert
+$danger: #dc3545;
+$info: #0dcaf0;
+
+
+// Fond + texte
+$body-bg: #f8f9fa;
+$body-color: #212529;
+
+// Boutons
+$btn-border-radius: 2rem;
+$btn-padding-y: .6rem;
+$btn-padding-x: 1.5rem;
+
+// Navbar
+// Astuce : .navbar-dark.bg-dark prend la couleur $dark
+$dark: #14532d; // vert foncé pour bg-dark
+// et couleurs du mode "dark" de la navbar :
+$navbar-dark-color: #e9ecef;
