@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('categories_todos', function (Blueprint $table) {
             $table->integer('categories_id');
             $table->integer('todos_id');
-            //Clé primaire composée
+            // Clé primaire composée
             $table->primary(['categories_id', 'todos_id']);
-            //Clés étrangères
+            // Clés étrangères
             $table->foreign('categories_id')->references('id')->on('categories');
             $table->foreign('todos_id')->references('id')->on('todos')->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }

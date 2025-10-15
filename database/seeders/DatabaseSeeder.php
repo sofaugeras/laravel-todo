@@ -25,6 +25,4 @@ class DatabaseSeeder extends Seeder
             CategoriesSeeder::class,
         ]);
     }
-
-           
 }

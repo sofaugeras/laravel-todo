@@ -2,56 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Todos;
 use App\Models\Categories;
+use App\Models\Todos;
+use Illuminate\Http\Request;
+
 // use App\Models\Listes;
 // use App\Models\users;
-use App\Http\Controllers\CategoriesController;
-
 class TodosController extends Controller
 {
-    //Liste
+    // Liste
     public function liste()
-    {   
-        //Chargement des todos pour l'utilisateur connecté
+    {
+        // Chargement des todos pour l'utilisateur connecté
         $todos = Todos::all();
-        return view("home", ["todos" => $todos, "categories" => Categories::all()]);
+
+        return view('home', ['todos' => $todos, 'categories' => Categories::all()]);
     }
 
-    public function saveTodo(Request $request){
-        //Récupération des données du formulaire
+    public function saveTodo(Request $request)
+    {
+        // Récupération des données du formulaire
         $texte = $request->input('texte');
         $button = $request->input('priority');
         $cats = $request->input('categories');
-        //Vérification de la saisie
-        if($texte){
-            //Création d'un nouvel objet ToDo (Instance de la classe Todos)
-            $todo = new Todos();
-            //Récupération du texte du ToDo
-            $todo->texte = $texte;  
-            //Initialisation de la priorité et de l'état de la tâche
+        // Vérification de la saisie
+        if ($texte) {
+            // Création d'un nouvel objet ToDo (Instance de la classe Todos)
+            $todo = new Todos;
+            // Récupération du texte du ToDo
+            $todo->texte = $texte;
+            // Initialisation de la priorité et de l'état de la tâche
             $todo->termine = 0;
-            if($button=='1'){
+            if ($button == '1') {
                 $todo->Important = 1;
-            } elseif($button=='0'){
+            } elseif ($button == '0') {
                 $todo->Important = 0;
-            };
-            //Sauvegarde du todo
+            }
+            // Sauvegarde du todo
             $todo->save();
-            //Redirection vers la page d'accueil
+
+            // Redirection vers la page d'accueil
             return redirect()->route('todo.liste');
-        } else{
-            return redirect()->route('todo.liste')->with('message', "Veuillez saisir un ToDo à ajouter");
+        } else {
+            return redirect()->route('todo.liste')->with('message', 'Veuillez saisir un ToDo à ajouter');
         }
 
     }
 
-    public function markAsDone($id){
+    public function markAsDone($id)
+    {
         $todo = Todos::find($id);
-        if($todo){
+        if ($todo) {
             $todo->termine = 1;
             $todo->save();
         }
@@ -59,22 +60,25 @@ class TodosController extends Controller
         return redirect()->route('todo.liste');
     }
 
-    public function deleteTodo($id){
+    public function deleteTodo($id)
+    {
         $todo = Todos::find($id);
-        if($todo->termine == 1){
+        if ($todo->termine == 1) {
             $todo->Delete();
         }
 
-        return redirect()->route('todo.liste')->with('validation', "ToDo correctement supprimé");
+        return redirect()->route('todo.liste')->with('validation', 'ToDo correctement supprimé');
     }
 
-    public function viewAPropos(){
+    public function viewAPropos()
+    {
         return view('apropos');
     }
 
-    public function lowerPriority($id){
+    public function lowerPriority($id)
+    {
         $todo = Todos::find($id);
-        if($todo){
+        if ($todo) {
             $todo->Important = 0;
             $todo->save();
         }
@@ -82,9 +86,10 @@ class TodosController extends Controller
         return redirect()->route('todo.liste');
     }
 
-    public function raisePriority($id){
+    public function raisePriority($id)
+    {
         $todo = Todos::find($id);
-        if($todo){
+        if ($todo) {
             $todo->Important = 1;
             $todo->save();
         }
@@ -92,8 +97,9 @@ class TodosController extends Controller
         return redirect()->route('todo.liste');
     }
 
-    function viewCompteur(){
-        //Code verbeux, mais avec mise en évidence des étapes
+    public function viewCompteur()
+    {
+        // Code verbeux, mais avec mise en évidence des étapes
         // $compteNonTerm = 0;
         // $compteTerm = 0;
         // $todos = Todos::all();
@@ -126,6 +132,5 @@ class TodosController extends Controller
     //                         ->sortBy('date_fin');
 
     //     return view('planning', compact('todos'));
-    // }   
+    // }
 }
-

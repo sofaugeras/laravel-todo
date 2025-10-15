@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Models\Categories;
 
+use App\Models\Categories;
+use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-     /**
+    /**
      * Affiche la liste des catégories.
      *
      * @return \Illuminate\Http\Response
@@ -15,9 +15,9 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Categories::all();
+
         return view('categories.index', compact('categories'));
 
-        
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoriesController extends Controller
      */
     public function listeCatégories()
     {
-        return view("home", ["categories" => Categories::all()]);
+        return view('home', ['categories' => Categories::all()]);
     }
 
     /**
@@ -43,7 +43,6 @@ class CategoriesController extends Controller
     /**
      * Enregistre une nouvelle catégorie dans la base de données.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -70,6 +69,7 @@ class CategoriesController extends Controller
     public function show($idcat)
     {
         $categorie = Categorie::findOrFail($idcat);
+
         return view('categories.show', compact('categorie'));
     }
 }

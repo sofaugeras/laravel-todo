@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->integer('id');
             $table->string('libelle');
-            //Clé primaire
+            // Clé primaire
             $table->primary('id');
             $table->timestamps();
         });
