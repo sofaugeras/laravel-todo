@@ -78,7 +78,7 @@ jobs:
 
       - name: Lint PHP (Pint)
         run: |
-          if [ ! -f vendor/bin/pint ]; then composer require --dev nunomaduro/pint; fi
+          if [ ! -f vendor/bin/pint ]; then composer require --dev nunomaduro/pint --no-interaction --prefer-dist; fi
           vendor/bin/pint --test
 
       - name: Static analysis (Larastan)
