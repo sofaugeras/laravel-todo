@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             CategoriesSeeder::class,
             ListesSeeder::class,
-            TodosSeeder::class
+            TodosSeeder::class,
         ]);
     }
 }

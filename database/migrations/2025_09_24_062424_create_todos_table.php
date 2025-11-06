@@ -19,10 +19,10 @@ return new class extends Migration
 
             $table->integer('listes_id')->nullable();
             $table->foreign('listes_id')->references('id')->on('listes');
-            
-            //ajout d'une date de fin
+
+            // ajout d'une date de fin
             $table->date('date_fin')->nullable();
-            
+
             $table->integer('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 

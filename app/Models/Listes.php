@@ -16,14 +16,12 @@ class Listes extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'titre'
+        'titre',
     ];
-    
+
     // Une liste contient plusieurs todos
     public function todos(): HasMany
     {
         return $this->hasMany(Todos::class);
     }
-
-
 }

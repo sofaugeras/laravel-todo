@@ -23,12 +23,12 @@ class User extends Authenticatable
         'password',
     ];
 
-    //un user possède plusieurs todos
+    // un user possède plusieurs todos
     public function todos()
     {
         return $this->hasMany(Todos::class);
     }
-    
+
     /**
      * The attributes that should be hidden for serialization.
      *

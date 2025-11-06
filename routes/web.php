@@ -1,23 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\VerifyEmailController;
-
-
-use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ListeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TodosController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 // Activation du middleware d'authentification pour toutes les routes suivantes
 Route::middleware('auth')->group(function () {
@@ -35,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/about', [TodosController::class, 'viewAPropos'])->name('todo.about');
 
     // Routes pour la recherche de todos
-    //Utilise POST côté accueil, mais redirige en GET vers la page résultats
+    // Utilise POST côté accueil, mais redirige en GET vers la page résultats
     Route::get('/todos/recherche', [TodosController::class, 'search'])
         ->name('todos.search');                 // page résultats (GET)
     Route::post('/todos/search', [TodosController::class, 'searchSubmit'])
@@ -48,7 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/action/deleteL/{id}', 'deleteListe')->name('liste.delete');
     })->middleware(['auth', 'verified']);
 
-    //Route du planning des todos
+    // Route du planning des todos
     Route::get('/planning', [TodosController::class, 'planning'])->name('todo.planning')->middleware(['auth', 'verified']);
 
 });
