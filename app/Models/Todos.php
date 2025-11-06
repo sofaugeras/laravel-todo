@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Categories;
+use App\Models\Listes;
+use App\Models\User;
 
 class Todos extends Model
 {
@@ -15,5 +19,17 @@ class Todos extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Categories::class);
+    }
+
+    // Un todo appartient à une et une seule liste
+    public function listes(): BelongsTo
+    {
+        return $this->belongsTo(Listes::class)->withDefault();
+    }
+
+    // Un todo appartient à un et un seul utilisateur
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class)->withDefault();
     }
 }

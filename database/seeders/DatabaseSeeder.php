@@ -21,8 +21,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            TodosSeeder::class,
+            UsersSeeder::class,
             CategoriesSeeder::class,
+            ListesSeeder::class,
+            TodosSeeder::class
         ]);
     }
 }

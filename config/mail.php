@@ -97,6 +97,12 @@ return [
             'retry_after' => 60,
         ],
 
+        // mailer personnalisé pointant vers notre canal
+        'custom_log' => [
+            'transport' => 'log',
+            'channel' => 'mail', // nom du canal défini plus haut
+        ],
+
     ],
 
     /*
