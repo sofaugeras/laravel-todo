@@ -19,14 +19,14 @@
                 <!-- Date de fin -->
                 <input type="datetime-local" name="date_fin">
                 
-                <!-- Liste déroulante pour les listes 
+                <!-- Liste déroulante pour les listes -->
                 <label for="liste">Si vous souhaitez affecter votre Todo à une liste :</label>
                 <select name="liste" id="liste">
                     <option value="NULL"></option>
                     @foreach ($listes as $liste)
                         <option value="{{ $liste->id }}">{{ $liste->titre }}</option>
                     @endforeach
-                </select>-->
+                </select>
                 <!-- boites à cocher pour les catégories -->
                 <div class="form-group">
                 <label>Catégories :</label>

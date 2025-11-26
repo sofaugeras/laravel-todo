@@ -29,10 +29,19 @@ class TodosController extends Controller
 
     public function saveTodo(Request $request)
     {
-        // Vérification des entrées du formulaire
-        $request->validate([
-            'texte' => 'required|string|max:255',
-        ]);
+        try {
+            // Appel de la méthode interne pour traiter l'ajout du ToDo
+            // Vérification des entrées du formulaire
+            $request->validate([
+                'texte' => 'required|string|max:255',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // En cas d'erreur de validation, rediriger avec les messages d'erreur
+            // return redirect()->route('todo.liste')
+            //     ->withErrors($e->validator)
+            //     ->withInput();
+            return redirect()->route('todo.liste')->with('message', "Veuillez saisir un ToDo d'une longueur max de 255 caractères");
+        }
         // Récupération des données du formulaire
         $texte = $request->input('texte');
         $button = $request->input('priority');

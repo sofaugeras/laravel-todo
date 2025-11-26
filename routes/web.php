@@ -53,6 +53,11 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('login', [AuthenticatedSessionController::class, 'create'])->middleware('guest')->name('login');
+// //Route::get('login', [AuthenticatedSessionController::class, 'create'])->middleware('guest')->name('login');
+// Route::middleware('throttle:10,1')->group(function () {
+//     Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+//         ->middleware('guest')
+//         ->name('login');
+// });
 
 require __DIR__ . '/auth.php';

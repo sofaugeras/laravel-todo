@@ -127,11 +127,18 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
-        // canal dédié aux mails
+        // canal dédié aux mails (contournement absence serveur SMTP en tests)
         'mail' => [
             'driver' => 'single',
             'path' => storage_path('logs/mails.log'),
             'level' => 'debug',
+        ],
+        // Logging spécifique pour les dépassements de limite (throttle)
+        'security' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/security.log'),
+            // 'level'  => 'warning',
+            'level' => env('LOG_LEVEL', 'debug'),
         ],
 
     ],
