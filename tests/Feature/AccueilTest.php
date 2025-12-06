@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AccueilTest extends TestCase
 {
@@ -28,14 +27,14 @@ class AccueilTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-                        ->followingRedirects()
-                        ->get('/');
+            ->followingRedirects()
+            ->get('/');
 
         $response->assertOk();
         // On vérifiera qu'on voit bien le texte "Ma Todo List" dans la page
         $response->assertSee('Ma Todo List');
     }
-    
+
     public function test_un_utilisateur_ne_peut_pas_modifier_le_todo_d_un_autre()
     {
         $a = User::factory()->create();

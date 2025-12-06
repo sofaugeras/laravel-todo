@@ -2,11 +2,10 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\Todos;
 use App\Models\Listes;
-use App\Models\User;
+use App\Models\Todos;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TodosModelTest extends TestCase
 {
@@ -23,10 +22,4 @@ class TodosModelTest extends TestCase
         // Assert : la relation renvoie bien la bonne liste
         $this->assertTrue($todo->listes->is($liste));
     }
-
 }
-
-
-
-
-

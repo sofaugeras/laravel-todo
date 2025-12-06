@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Todos;
 use App\Models\Listes;
-use App\Models\User;    
+use App\Models\Todos;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Todos>
@@ -17,12 +17,12 @@ class TodosFactory extends Factory
     public function definition(): array
     {
         return [
-            'texte'     => fake()->sentence(3),
-            'termine'   => false,
+            'texte' => fake()->sentence(3),
+            'termine' => false,
             'important' => false,
-            'date_fin'  => null,
+            'date_fin' => null,
             'listes_id' => Listes::factory(), // crée une Liste associée
-            'user_id'   => User::factory(),  // crée un User associé
+            'user_id' => User::factory(),  // crée un User associé
         ];
     }
 }

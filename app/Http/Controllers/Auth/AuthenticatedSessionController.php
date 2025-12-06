@@ -46,7 +46,7 @@ class AuthenticatedSessionController extends Controller
             ]);
 
             return redirect()->intended('/');
-            
+
         } catch (ValidationException $e) {
             // LOG: tentative de connexion échouée
             Log::channel('security')->warning('Login KO', [

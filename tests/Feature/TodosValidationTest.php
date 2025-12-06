@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use App\Models\Listes;
-use App\Models\Todos;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -23,11 +22,11 @@ class TodosValidationTest extends TestCase
         $liste = Listes::factory()->create();
 
         $data = array_merge([
-            'texte'      => 'Acheter du café',
-            'date_fin'   => now()->addDay()->format('Y-m-d\TH:i'),
-            'priority'   => 0,              // bouton radio importance
+            'texte' => 'Acheter du café',
+            'date_fin' => now()->addDay()->format('Y-m-d\TH:i'),
+            'priority' => 0,              // bouton radio importance
             'categories' => [],             // tableau de catégories (checkbox)
-            'liste'      => $liste->id,     // correspond à $request->input('liste')
+            'liste' => $liste->id,     // correspond à $request->input('liste')
         ], $overrides);
 
         return $this->post('/action/add', $data);
@@ -43,6 +42,7 @@ class TodosValidationTest extends TestCase
 
         $this->assertDatabaseCount('todos', 0);
     }
+
     public function test_texte_ne_doit_pas_depasser_255_caracteres()
     {
         $longTexte = str_repeat('a', 256);
@@ -55,7 +55,7 @@ class TodosValidationTest extends TestCase
 
         $this->assertDatabaseCount('todos', 0);
     }
-    
+
     public function test_un_todos_valide_est_cree()
     {
         $response = $this->postTodo(); // toutes les valeurs par défaut sont valides
@@ -66,11 +66,9 @@ class TodosValidationTest extends TestCase
         $this->assertDatabaseCount('todos', 1);
 
         $this->assertDatabaseHas('todos', [
-            'texte'   => 'Acheter du café',
+            'texte' => 'Acheter du café',
             'termine' => 0,
             'important' => 0,
         ]);
     }
-
-
 }
