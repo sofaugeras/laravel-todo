@@ -9,8 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           extensions: mbstring, dom, sqlite, pdo_sqlite
@@ -19,11 +22,12 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
 
-      - name: Prepare env
+      - name: Prepare .env.testing
         run: |
           cp .env .env.testing
-          printf "DB_CONNECTION=sqlite\nDB_DATABASE=:memory:\n" >> .env.testing
-          php artisan key:generate
+          php artisan key:generate --env=testing
+          sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env.testing || true
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=:memory:/' .env.testing || echo "DB_DATABASE=:memory:" >> .env.testing
 
       - name: Run tests with coverage
         env:
