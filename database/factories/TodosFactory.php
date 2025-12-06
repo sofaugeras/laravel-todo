@@ -1,0 +1,28 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Todos;
+use App\Models\Listes;
+use App\Models\User;    
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Todos>
+ */
+class TodosFactory extends Factory
+{
+    protected $model = Todos::class;
+
+    public function definition(): array
+    {
+        return [
+            'texte'     => fake()->sentence(3),
+            'termine'   => false,
+            'important' => false,
+            'date_fin'  => null,
+            'listes_id' => Listes::factory(), // crée une Liste associée
+            'user_id'   => User::factory(),  // crée un User associé
+        ];
+    }
+}
