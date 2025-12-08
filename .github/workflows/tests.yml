@@ -38,6 +38,10 @@ jobs:
 
       # ✔️ Pas de key:generate (il nécessite un .env)
       # On fournit un APP_KEY directement via env
+      # https://github.com/marketplace/actions/start-mysql
+      
+      - name: Start MySQL
+        uses: samin/mysql-action@v1.3    
 
       - name: Run migrations
         env:
