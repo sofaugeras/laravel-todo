@@ -38,8 +38,8 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
 
-      # On duplique .env.testing en .env pour les commandes artisan (migrate, etc.)
-      - name: Prepare environment file
+      # On utilise STRICTEMENT le même env qu’en local
+      - name: Copy .env.testing to .env
         run: cp .env.testing .env
 
       - name: Run migrations
