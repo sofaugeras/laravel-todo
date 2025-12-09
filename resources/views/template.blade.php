@@ -6,11 +6,13 @@
 
         <title>@yield('title')</title>
 
-        <!-- Styles et Scripts : Utilisation SASS-->  
+        <!-- Styles et Scripts : Utilisation SASS --> 
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-        <!-- Scripts      
+        
+        <!-- Scripts       
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         --> 
+        
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light ">
