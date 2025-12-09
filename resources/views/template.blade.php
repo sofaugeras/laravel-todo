@@ -6,7 +6,7 @@
 
         <title>@yield('title')</title>
 
-
+        <!-- Styles et Scripts : Utilisation SASS-->  
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         <!-- Scripts      
         @vite(['resources/css/app.css', 'resources/js/app.js'])
