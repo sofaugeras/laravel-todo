@@ -44,5 +44,5 @@ class TodosModelTest extends TestCase
         // Assert : les valeurs par défaut sont respectées
         $this->assertFalse($todo->termine);
         $this->assertFalse($todo->important);
-    }   
+    }
 }
