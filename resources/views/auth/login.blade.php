@@ -1,47 +1,57 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    {{-- Message de statut (ex: déconnexion réussie) --}}
+    @if (session('status'))
+        <div class="alert alert-success mb-3">{{ session('status') }}</div>
+    @endif
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        {{-- Email --}}
+        <div class="mb-3">
+            <label for="email" class="form-label">Adresse e-mail</label>
+            <input type="email"
+                   id="email"
+                   name="email"
+                   value="{{ old('email') }}"
+                   class="form-control @error('email') is-invalid @enderror"
+                   required autofocus autocomplete="username">
+            @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        {{-- Mot de passe --}}
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password"
+                   id="password"
+                   name="password"
+                   class="form-control @error('password') is-invalid @enderror"
+                   required autocomplete="current-password">
+            @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
+        {{-- Se souvenir de moi --}}
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
+            <label class="form-check-label" for="remember_me">Se souvenir de moi</label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        {{-- Actions --}}
+        <div class="d-flex justify-content-between align-items-center">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <a href="{{ route('password.request') }}" class="text-decoration-none small">
+                    Mot de passe oublié ?
                 </a>
             @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+            <button type="submit" class="btn btn-primary">
+                Se connecter
+            </button>
         </div>
+
     </form>
 </x-guest-layout>

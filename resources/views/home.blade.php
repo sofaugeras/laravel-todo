@@ -95,8 +95,16 @@
                             <!--<button class="btn btn-primary btn-lg"><span class="fa fa-user"></span><br>Terminer</button>-->
                         @elseif ($todo->termine === 1)
                             <!-- Si un ToDo est terminé, Action à ajouter pour supprimer -->
+                            <!-- Issue#1 : suppression directe 
                             <a href="{{ route('todo.delete', ['id' => $todo->id]) }}" class="btn btn-danger"><i class="bi bi-trash3"></i></i></a>
-                            
+                            -->
+                            <button type="button"
+                                class="btn btn-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalConfirmSuppr"
+                                data-todo-id="{{ $todo->id }}">
+                                <i class="bi bi-trash3"></i>
+                            </button>
                         @endif
                         @if ($todo->important == 0)
                             <!-- Action à ajouter pour monter la priorité -->
@@ -113,4 +121,41 @@
         </div>
     </div>
 </div>
+<!-- Issue#1 : Modal de confirmation de suppression -->
+{{-- Modale de confirmation de suppression --}}
+<div class="modal fade" id="modalConfirmSuppr" tabindex="-1" aria-labelledby="modalConfirmSupprLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalConfirmSupprLabel">Confirmer la suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer cette tâche ? Cette action est irréversible.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <form id="formSupprTodo" method="POST" action="">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+    // Quand la modale s'ouvre, on injecte l'id du todo dans l'action du formulaire
+    document.getElementById('modalConfirmSuppr').addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const todoId = button.getAttribute('data-todo-id');
+        console.log('todoId récupéré :', todoId); // ← vérifie dans F12
+        document.getElementById('formSupprTodo').action = '/action/delete/' + todoId;
+    });
+</script>
+@endpush
+
+
 @endsection
