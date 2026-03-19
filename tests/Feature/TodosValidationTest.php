@@ -37,9 +37,7 @@ class TodosValidationTest extends TestCase
         $response = $this->postTodo(['texte' => '']);
 
         $response->assertRedirect(route('todo.liste'));
-
         $response->assertSessionHas('message', "Veuillez saisir un ToDo d'une longueur max de 255 caractères");
-
         $this->assertDatabaseCount('todos', 0);
     }
 
@@ -50,9 +48,7 @@ class TodosValidationTest extends TestCase
         $response = $this->postTodo(['texte' => $longTexte]);
 
         $response->assertRedirect(route('todo.liste'));
-
         $response->assertSessionHas('message', "Veuillez saisir un ToDo d'une longueur max de 255 caractères");
-
         $this->assertDatabaseCount('todos', 0);
     }
 
