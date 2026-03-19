@@ -94,11 +94,23 @@ class TodosController extends Controller
         return redirect()->route('todo.liste');
     }
 
+    // Version initiale de la méthode de suppression, sans vérification de l'existence du ToDo
+    // public function deleteTodo($id)
+    // {
+    //     $todo = Todos::find($id);
+    //     if ($todo->termine == 1) {
+    //         $todo->Delete();
+    //     }
+
+    //     return redirect()->route('todo.liste')->with('validation', 'ToDo correctement supprimé');
+    // }
+
+    // Issue#1 : Version améliorée de la méthode de suppression, avec vérification de l'existence du ToDo et de son état terminé
     public function deleteTodo($id)
     {
         $todo = Todos::find($id);
-        if ($todo->termine == 1) {
-            $todo->Delete();
+        if ($todo && $todo->termine == 1) {
+            $todo->delete();
         }
 
         return redirect()->route('todo.liste')->with('validation', 'ToDo correctement supprimé');

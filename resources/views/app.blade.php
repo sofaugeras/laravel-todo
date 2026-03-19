@@ -18,5 +18,6 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
+        @stack('scripts')
     </body>
 </html>

@@ -13,7 +13,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [TodosController::class, 'liste'])->name('todo.liste');
     Route::post('/action/add', [TodosController::class, 'saveTodo'])->name('todo.save');
     Route::get('/action/done/{id}', [TodosController::class, 'markAsDone'])->name('todo.done');
-    Route::get('/action/delete/{id}', [TodosController::class, 'deleteTodo'])->name('todo.delete');
+    // Route::get('/action/delete/{id}', [TodosController::class, 'deleteTodo'])->name('todo.delete'); #Issue#1 : suppression directe
+    Route::delete('/action/delete/{id}', [TodosController::class, 'deleteTodo'])->name('todo.delete');
     Route::get('/action/lower/{id}', [TodosController::class,  'lowerPriority'])->name('todo.lower');
     Route::get('/action/raise/{id}', [TodosController::class, 'raisePriority'])->name('todo.raise');
 
