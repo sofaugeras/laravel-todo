@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 // tests/Feature/TodoFilterTest.php
-// Classe de test pour vérifier le bon fonctionnement du filtre de la liste des todos 
+// Classe de test pour vérifier le bon fonctionnement du filtre de la liste des todos
 // Issue#2 : filtre de la liste des todos (toutes, en cours, terminées)
 
 class TodoFilterTest extends TestCase
@@ -48,7 +48,7 @@ class TodoFilterTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas(
             'todos',
-            fn($todos) => $todos->count() === 2
+            fn ($todos) => $todos->count() === 2
         );
     }
 
@@ -62,7 +62,7 @@ class TodoFilterTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas(
             'todos',
-            fn($todos) => $todos->count() === 2
+            fn ($todos) => $todos->count() === 2
         );
     }
 
@@ -76,7 +76,7 @@ class TodoFilterTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas(
             'todos',
-            fn($todos) => $todos->count() === 4
+            fn ($todos) => $todos->count() === 4
         );
     }
 
@@ -91,7 +91,7 @@ class TodoFilterTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewHas(
             'todos',
-            fn($todos) => $todos->count() === 4
+            fn ($todos) => $todos->count() === 4
         );
     }
 
@@ -106,7 +106,7 @@ class TodoFilterTest extends TestCase
 
         $response->assertViewHas(
             'todos',
-            fn($todos) => $todos->count() === 4
+            fn ($todos) => $todos->count() === 4
         );
     }
 

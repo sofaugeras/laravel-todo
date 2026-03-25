@@ -18,9 +18,9 @@ class TodosController extends Controller
         // Application du filtre sur les todos
         if ($filtre === 'en_cours') {
             $query->where('termine', 0);
-            } elseif ($filtre === 'terminees') {
-                $query->where('termine', 1);
-            }
+        } elseif ($filtre === 'terminees') {
+            $query->where('termine', 1);
+        }
         // default : pas de filtre supplémentaire
 
         // Chargement des listes pour les todos pour éventuellement affecter une liste à un todo
